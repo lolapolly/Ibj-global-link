@@ -1,12 +1,30 @@
 class ItemsController < ApplicationController
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
+    @items = policy_scope(Item)
+    if params[:search]
+      @items = Item.where("name ILIKE '%#{params[:search]}%' OR description ILIKE '%#{params[:search]}%' OR category ILIKE '%#{params[:search]}%' OR gender ILIKE '%#{params[:search]}%'").select { |item| item.purchase.nil? }
+    else
+      @items = policy_scope(Item).select { |item| item.purchase.nil? }
+    end
   end
 
   def new
+    @item = Item.new
+    authorize @item
   end
 
   def create
+    @item = Item.new(item_params)
+    authorize @item
+    @item.user = current_user
+    if @item.save
+      redirect_to item_path(@item)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -16,8 +34,27 @@ class ItemsController < ApplicationController
   end
 
   def update
+    if @item.user == current_user || current_user.admin?
+      @item.update(item_params)
+      redirect_to item_path(@item)
+    end
   end
 
   def destroy
+    if @item.user == current_user || current_user.admin?
+      @item.destroy
+      redirect_to items_path
+    end
+  end
+
+  private
+
+  def find_item
+    @item = Item.find(params[:id])
+    authorize @item
+  end
+
+  def item_params
+    params.require(:item).permit(:name, :description, :price, :photo, :category, :gender)
   end
 end
