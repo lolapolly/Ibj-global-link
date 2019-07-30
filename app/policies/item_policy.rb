@@ -9,7 +9,7 @@ class ItemPolicy < ApplicationPolicy
     end
 
     def create?
-      record.user == user || user&.admin?
+      true
     end
 
     def edit?
