@@ -1,2 +1,11 @@
-<h1>Items#new</h1>
-<p>Find me in app/views/items/new.html.erb</p>
+<div class="form container">
+  <%= simple_form_for(@item) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :price %>
+    <%= f.input :photo %>
+    <%= f.input :category, collection: ['Marble', 'Granite', 'Mosaic'] %>
+    <%= f.submit "Add Item", class: "btn btn-primary", style: "width: 150px" %>
+    <%= link_to "Back", items_path, class: "btn btn-info" %>
+  <% end %>
+</div>

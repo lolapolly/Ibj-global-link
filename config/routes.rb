@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :items do
     resources :purchases, only: [:new, :create, :show]
   end
+  get 'my_profile', to: 'pages#profile', as: :my_profile
 end
