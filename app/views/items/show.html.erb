@@ -1,2 +1,5 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<h2><%= @item.name.capitalize %></h2>
+<%= cl_image_tag @item.photo, crop: :fill, class:"dog-image" %>
+<%= link_to "edit", edit_item_path%>
+<%= link_to "Delete", item_path(@item),  method: :delete %>
+

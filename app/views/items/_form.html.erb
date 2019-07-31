@@ -1,0 +1,13 @@
+
+<div class="form container">
+  <%= simple_form_for(@item) do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :price %>
+    <%= f.input :category, collection: ['Marble', 'Granite', 'Mosaic'] %>
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
+    <%= f.submit "Submit", class: "btn btn-primary", style: "width: 150px" %>
+    <%= link_to "Back", items_path, class: "btn btn-info" %>
+  <% end %>
+</div>
