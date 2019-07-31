@@ -6,4 +6,11 @@ class ItemsTest < ApplicationSystemTestCase
 
     assert_selector "h1", text: "Item"
   end
+
+  # test "visiting the show" do
+  #   visit item_path(Item)
+
+  #   assert_selector "h1", text:
+
+  # end
 end
