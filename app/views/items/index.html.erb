@@ -1,8 +1,11 @@
 <h1>Our products</h1>
 
-
 <% @items.each do |item| %>
-  <p><%= item.name %>
-    <%= item.description %>
-  </p>
+  <% if item.nil? %>
+    <p>sorry there are no items available</p>
+  <% else %>
+    <p><%= item.name %>
+      <%= item.description %>
+    </p>
+ <% end %>
 <% end %>

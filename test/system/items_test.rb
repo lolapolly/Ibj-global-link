@@ -35,7 +35,7 @@ class ItemsTest < ApplicationSystemTestCase
     fill_in "Description", with: "very good"
     fill_in "Price", with: "5"
     # fill_in "Photo", with: "mosaic.jpg"
-    fill_in "Category", with: "Mosaic"
+    click_on "Category", with: "Mosaic"
     click_on "Submit"
     assert_equal "/items", page.current_path
     assert_equal item_count_before, Item.count + 1
