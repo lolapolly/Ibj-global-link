@@ -1,0 +1,6 @@
+
+lola:
+  email: "lola@hotmail.it"
+  name: "lola"
+  admin: true
+  encrypted_password: 123456
